@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+        <script>
+            AFRAME.registerComponent('custom-controls', {
+              init: function () {
+                this.onKeyDown = this.onKeyDown.bind(this);
+              },
+              play: function () {
+                window.addEventListener('keydown', this.onKeyDown);
+              },
+              pause: function () {
+                window.removeEventListener('keydown', this.onKeyDown);
+              },
+              onKeyDown: function (evt) {
+                var position = this.el.getAttribute('position');
+                if (evt.key === 'e') { // Move up
+                  position.y += 0.1;
+                } else if (evt.key === 'q') { // Move down
+                  position.y -= 0.1;
+                }
+                this.el.setAttribute('position', position);
+              }
+            });
+          </script>
+    </head>
+    <body>
+        <a-scene>
+            <a-entity gltf-model="models/pawn.glb" position="0.36 0.075 .2" scale="0.5 0.5 0.5"></a-entity>
+            <a-entity gltf-model="models/pawn.glb" position="0.36 0.075 .6" scale="0.5 0.5 0.5"></a-entity>
+            <a-entity gltf-model="models/pawn.glb" position="0.36 0.075 1.0" scale="0.5 0.5 0.5"></a-entity>
+            <a-entity gltf-model="models/pawn.glb" position="0.36 0.075 1.4" scale="0.5 0.5 0.5"></a-entity>
+            <a-entity gltf-model="models/pawn.glb" position="0.36 0.075 -.2" scale="0.5 0.5 0.5"></a-entity>
+            <a-entity gltf-model="models/pawn.glb" position="0.36 0.075 -.6" scale="0.5 0.5 0.5"></a-entity>
+            <a-entity gltf-model="models/pawn.glb" position="0.36 0.075 -1.0" scale="0.5 0.5 0.5"></a-entity>
+            <a-entity gltf-model="models/pawn.glb" position="0.36 0.075 -1.4" scale="0.5 0.5 0.5"></a-entity>
+            <a-entity gltf-model="./models/board.glb" position="0 0 0" scale="0.25 0.25 0.25"></a-entity>
+            <a-entity camera wasd-controls look-controls custom-controls position="0 1.6 0"></a-entity>
+            <!-- <a-sky></a-sky> -->
+        </a-scene>
+        
+    </body>
+</html>
